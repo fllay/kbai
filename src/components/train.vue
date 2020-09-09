@@ -1,5 +1,9 @@
 <template>
   <div style="height: 100vh; width: 100vw;">
+      <loading :active.sync="isLoading" 
+        :can-cancel="true" 
+        :on-cancel="onCancel"
+        :is-full-page="fullPage"></loading>
     <b-input-group class="train-panel">
       <b-input-group-prepend>
         <b-button class="btn-create" variant="primary" @click="onCreate"
@@ -47,6 +51,10 @@
 import axios from "axios";
 import { mapGetters } from "vuex";
 
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 var axiosInstance = axios.create({
   baseURL: `${location.protocol}//${location.hostname}:80`,
 });
@@ -75,6 +83,8 @@ export default {
       isDownloading: false,
       imageData : null ,
       showModal: false,
+      isLoading: false,
+      fullPage: true,
     };
   },
   methods: {
@@ -111,6 +121,7 @@ export default {
    
     downloadAndExtract:  function() {
       console.log("Now loading!!!!")
+      this.isLoading = true;
             axiosInstance.post("/detect", {
                 projectpath: this.$store.state.projectDir,
                 filename : "1569404476961.png"
@@ -129,7 +140,7 @@ export default {
              
               //this.imageData = url.createObjectURL(blob);
 
-
+          this.isLoading = false;
               
                 var base64data = str;    
                 //this.imageData = base64data          
