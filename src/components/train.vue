@@ -66,7 +66,9 @@ var axiosInstance = axios.create({
 
 export default {
   name: "Training",
-  components: {},
+  components: {
+    Loading
+  },
   props: {},
   created() {},
   data() {
@@ -87,6 +89,7 @@ export default {
       fullPage: true,
     };
   },
+  
   methods: {
     onCreate: () => {
       window.open(
