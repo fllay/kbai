@@ -1,8 +1,7 @@
 <template>
   <div style="height: 100vh; width: 100vw;">
       <loading :active.sync="isLoading" 
-        :can-cancel="true" 
-        :on-cancel="onCancel"
+        :can-cancel="false" 
         :is-full-page="fullPage"></loading>
     <b-input-group class="train-panel">
       <b-input-group-prepend>
