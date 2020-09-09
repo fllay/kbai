@@ -166,11 +166,13 @@ export default {
 
 
     onTrain: async function() {
+      this.isLoading = true;
             axiosInstance.post("/upload", {
                 projectpath: this.$store.state.projectDir
             }).then((response) => {
                 console.log(response.data.status);
                 this.isDone = true
+                this.isLoading = false;
                 
 
             });
