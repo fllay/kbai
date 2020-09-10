@@ -35,6 +35,7 @@
     "vue-croppie": "^2.0.1",
     "vue-directive-long-press": "^1.1.0",
     "vue-grid-layout": "^2.3.4",
+    "vue-html5-camera": "^0.4.0",
     "vue-jcrop": "^1.0.3",
     "vue-loading-overlay": "^3.4.0",
     "vue-long-click": "0.0.4",
