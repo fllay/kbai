@@ -428,7 +428,7 @@ export default {
             this.imFolder = "images";
 
             var imPath = "/" + this.imFolder + "/";
-            var xmlFileName = this.selectedFile.replace(/\.[^/.]+$/, "") + ".xml";
+            var xmlFileName = this.selectedFile
 
             console.log("xmlFileName = ");
             console.log(xmlFileName);
@@ -517,7 +517,7 @@ export default {
         loadCb: function () {
             var imsr = this.imageSrc();
 
-            this.anotate.annotation.filename = this.selectedFile;
+            this.anotate.annotation.filename = this.selectedFile.replace(/\.[^/.]+$/, "") + ".xml";;
             this.anotate.annotation.folder = this.imFolder.substr(
                 1,
                 this.imFolder.length
