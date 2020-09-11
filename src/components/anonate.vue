@@ -268,6 +268,7 @@ export default {
 
             await axiosInstance
                 .post("/writeXml", {
+                    path : this.$store.getters.getProjectDir,
                     filename: xmlFileName,
                     data: result,
                 })
@@ -394,6 +395,7 @@ export default {
 
                 axiosInstance
                     .post("/writeXml", {
+                        path: this.$store.getters.getProjectDir,
                         filename: xmlFileName,
                         data: result,
                     })
@@ -522,7 +524,7 @@ export default {
                 1,
                 this.imFolder.length
             );
-            this.anotate.annotation.path = this.fullPath + "/client/" + imsr; //imsr.substr(1, imsr.length);
+            this.anotate.annotation.path = this.fullPath  + imsr; //imsr.substr(1, imsr.length);
             if (this.images === undefined || this.images.length == 0) {
                 // array empty or does not exist
             } else {
