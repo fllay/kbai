@@ -48,6 +48,15 @@
                     <span class="ico"><img src="../assets/UI/svg/up-arrow.svg" alt="" srcset="" /></span>
                 </div> -->
             </div>
+
+            <div class="center">
+
+                <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+                <!-- <div class="next op-btn">
+                    <span>ANNOTATE</span>
+                    <span class="ico"><img src="../assets/UI/svg/up-arrow.svg" alt="" srcset="" /></span>
+                </div> -->
+            </div>
             <!-- <div class="display-panel">
                 <p class="display-image">
                     <canvas
@@ -63,6 +72,18 @@
             <h3> New image has been captured!</h3>
         </div>
     </b-modal>
+
+  
+    <b-modal id="modal-1" title="BootstrapVue"  ok-only ok-variant="secondary" ok-title="Dismiss" >
+
+        <div class="large-12 medium-12 small-12 cell">
+            <label>Files
+                <input type="file" id="files" ref="files" accept="image/x-png,image/gif,image/jpeg" multiple v-on:change="handleFilesUpload()" />
+            </label>
+            <button v-on:click="submitFiles()" class="btn btn-primary new-label">Submit</button>
+        </div>
+    </b-modal>
+
 </div>
 </template>
 
@@ -86,8 +107,6 @@ import {
 // var convert = require("xml-js");
 import Camera from "vue-html5-camera"
 
-
-
 var axios_options = {
     proxy: {
         host: "127.0.0.1",
@@ -96,7 +115,7 @@ var axios_options = {
 };
 
 var axiosInstance = axios.create({
-    baseURL: `${location.protocol}//${location.hostname}:3000`,
+    baseURL: `${location.protocol}//${location.hostname}:80`,
 });
 
 export default {
@@ -129,11 +148,55 @@ export default {
         };
     },
     methods: {
+        submitFiles() {
+            /*
+              Initialize the form data
+            */
+            let formData = new FormData();
+
+            /*
+              Iteate over any file sent over appending the files
+              to the form data.
+            */
+            for (var i = 0; i < this.files.length; i++) {
+                let file = this.files[i];
+
+                formData.append('files[' + i + ']', file);
+            }
+
+            
+            formData.append('projectpath', this.$store.getters.getProjectDir);
+            console.log("This is a list")
+            console.log(formData)
+
+            /*
+              Make the request to the POST /multiple-files URL
+            */
+            axios.post('/multiple-files',
+                    formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    }
+                ).then(function () {
+                    console.log('SUCCESS!!');
+                })
+                .catch(function () {
+                    console.log('FAILURE!!');
+                });
+        },
+
+        /*
+          Handles a change on the file upload
+        */
+        handleFilesUpload() {
+            this.files = this.$refs.files.files;
+        },
         doNothing: function () {},
         createProject: function () {
             this.$store.dispatch("setProjectDir", "myProject");
         },
-        takePhoto: async function(){
+        takePhoto: async function () {
             console.log("takePhoto");
             this.src = this.$refs.camera.click();
             console.log(this.src);
@@ -486,7 +549,7 @@ export default {
         //    return this.$store.state.projectDir
         //}
     },
-    components:{
+    components: {
         Camera
     }
 };

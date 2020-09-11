@@ -4,6 +4,8 @@ import os
 import glob
 from xml.etree import ElementTree as ET
 import xmltodict
+from io import BytesIO
+from PIL import Image
 TEMPLATE_DIR = os.path.abspath('./dist')
 STATIC_DIR = os.path.abspath('./dist/static')
 print(TEMPLATE_DIR)
@@ -223,6 +225,43 @@ def upload():
     }
     return jsonify(res), 201
 
+@app.route("/multiple-files", methods=["POST"])
+def uploadm():
+    print("Save multiple files")
+    uploaded_files = request.files
+    print(request.form)
+    for key in request.files:
+        print(key)
+    print("********")
+    ii = request.files.values()
+    while True:
+        try:
+            # get the next item
+            element = next(ii)
+            print(element.filename)
+            filePath = os.path.join(STATIC_DIR, request.form['projectpath'], 'images', element.filename) 
+            im = Image.open(BytesIO(element.read()))
+            basename = os.path.splitext(os.path.basename(element.filename))[0] + '.png'
+
+            basewidth = 640
+            
+            wpercent = (basewidth/float(im.size[0]))
+            hsize = int((float(im.size[1])*float(wpercent)))
+            new_image = im.resize((basewidth,hsize), Image.ANTIALIAS)
+            #new_image = im.resize((640,480))
+            filePath2 = os.path.join(STATIC_DIR, request.form['projectpath'], 'images', basename)
+            new_image.save(filePath2)
+            
+            # do something with element
+        except StopIteration:
+            # if StopIteration is raised, break from loop
+            break
+  
+    res = {
+        'status': 'OK'
+    }
+    return jsonify(res), 201
+
 @app.route('/putdata', methods=['POST'])
 def create_task():
     if not request.json or not 'title' in request.json:
@@ -236,5 +275,5 @@ def create_task():
     tasks.append(task)
     return jsonify({'task': task}), 201
 
-#app.run(host='0.0.0.0', port=80)
-app.run()
+app.run(host='0.0.0.0', port=80)
+#app.run()
