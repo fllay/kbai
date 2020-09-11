@@ -1,5 +1,8 @@
 <template>
 <div class="w-100 h-100">
+    <loading :active.sync="isLoading" 
+        :can-cancel="false" 
+        :is-full-page="fullPage"></loading>
     <div class="d-flex w-100 h-100 outer-wrap">
         <div class="d-flex flex-fill flex-column main-panel" style="background-color:white;">
             <div class="d-flex flex-fill align-items-center justify-content-center">
@@ -106,6 +109,7 @@ import {
 
 // var convert = require("xml-js");
 import Camera from "vue-html5-camera"
+import Loading from 'vue-loading-overlay';
 
 var axios_options = {
     proxy: {
@@ -121,7 +125,7 @@ var axiosInstance = axios.create({
 export default {
     name: "Capture",
     components: {
-        /*VueSlickCarousel,*/
+         Loading
     },
     props: {},
     created() {},
@@ -144,7 +148,8 @@ export default {
             images: [],
             imageActiveIndex: undefined,
             showCapturing: false,
-            src: ""
+            src: "",
+            isLoading:false,
         };
     },
     methods: {
@@ -172,6 +177,7 @@ export default {
             /*
               Make the request to the POST /multiple-files URL
             */
+           this.isLoading = true
             axios.post('/multiple-files',
                     formData, {
                         headers: {
@@ -180,9 +186,11 @@ export default {
                     }
                 ).then(function () {
                     console.log('SUCCESS!!');
+                    this.isLoading = false
                 })
                 .catch(function () {
                     console.log('FAILURE!!');
+                    this.isLoading = false
                 });
         },
 
