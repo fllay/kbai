@@ -51,7 +51,7 @@
 
             <div class="center">
 
-                <b-button v-b-modal.modal-1>Launch demo modal</b-button>
+                <b-button v-b-modal.modal-1>Upload images</b-button>
                 <!-- <div class="next op-btn">
                     <span>ANNOTATE</span>
                     <span class="ico"><img src="../assets/UI/svg/up-arrow.svg" alt="" srcset="" /></span>
@@ -74,7 +74,7 @@
     </b-modal>
 
   
-    <b-modal id="modal-1" title="BootstrapVue"  ok-only ok-variant="secondary" ok-title="Dismiss" >
+    <b-modal id="modal-1" title="Upload images"  ok-only ok-variant="secondary" ok-title="Dismiss" >
 
         <div class="large-12 medium-12 small-12 cell">
             <label>Files
