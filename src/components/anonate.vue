@@ -424,7 +424,7 @@ export default {
             console.log(this.images[index]);
             console.log(this.images[index].file);
             this.imSrc = this.images[index].file;
-            this.selectedFile = this.images[index].fileName;
+            this.selectedFile = this.images[index].fileName.replace(/^.*[\\\/]/, '');
             this.imFolder = "images";
 
             var imPath = "/" + this.imFolder + "/";
