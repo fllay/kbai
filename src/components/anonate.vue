@@ -519,7 +519,7 @@ export default {
         loadCb: function () {
             var imsr = this.imageSrc();
 
-            this.anotate.annotation.filename = this.selectedFile.replace(/\.[^/.]+$/, "") + ".xml";;
+            this.anotate.annotation.filename = this.selectedFile.replace(/\.[^/.]+$/, "") + ".png";
             this.anotate.annotation.folder = this.imFolder.substr(
                 1,
                 this.imFolder.length
