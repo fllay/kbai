@@ -1,7 +1,8 @@
 <template>
 <div class="w-100 h-100">
-    <loading :active.sync="isLoading" 
-        :can-cancel="false" 
+        <div class="vld-parent">
+        <loading :active.sync="isLoading" 
+        :can-cancel="true" 
         :is-full-page="fullPage"></loading>
     <div class="d-flex w-100 h-100 outer-wrap">
         <div class="d-flex flex-fill flex-column main-panel" style="background-color:white;">
@@ -77,7 +78,7 @@
     </b-modal>
 
   
-    <b-modal id="modal-1" title="Upload images"  ok-only ok-variant="secondary" ok-title="Dismiss" >
+    <b-modal ref="modal-1-ref" id="modal-1" title="Upload images"  ok-only ok-variant="secondary" ok-title="Dismiss" >
 
         <div class="large-12 medium-12 small-12 cell">
             <label>Files
@@ -110,6 +111,7 @@ import {
 // var convert = require("xml-js");
 import Camera from "vue-html5-camera"
 import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 var axios_options = {
     proxy: {
@@ -125,7 +127,8 @@ var axiosInstance = axios.create({
 export default {
     name: "Capture",
     components: {
-         Loading
+         Loading,
+         Camera
     },
     props: {},
     created() {},
@@ -149,7 +152,7 @@ export default {
             imageActiveIndex: undefined,
             showCapturing: false,
             src: "",
-            isLoading:false,
+            isLoading: false,
         };
     },
     methods: {
@@ -177,7 +180,9 @@ export default {
             /*
               Make the request to the POST /multiple-files URL
             */
-           this.isLoading = true
+            this.$refs['modal-1-ref'].hide()
+            this.isLoading = true
+            console.log(this.isLoading )
             axios.post('/multiple-files',
                     formData, {
                         headers: {
@@ -187,11 +192,11 @@ export default {
                 ).then(function () {
                     console.log('SUCCESS!!');
                     this.isLoading = false
-                })
+                }.bind(this))
                 .catch(function () {
                     console.log('FAILURE!!');
                     this.isLoading = false
-                });
+                }.bind(this));
         },
 
         /*
@@ -556,9 +561,6 @@ export default {
         //getProjectDir() {
         //    return this.$store.state.projectDir
         //}
-    },
-    components: {
-        Camera
     }
 };
 </script>
