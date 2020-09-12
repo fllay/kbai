@@ -438,6 +438,7 @@ export default {
             axiosInstance
                 .post("/checkXmlFile", {
                     filename: xmlFileName,
+                    projectpath: this.$store.getters.getProjectDir
                 })
                 .then(
                     function (response) {
