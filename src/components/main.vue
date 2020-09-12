@@ -543,7 +543,7 @@ export default {
                 }.bind(this)
             );
 
-            print(this.gsProjectsName)
+            console.log(this.gsProjectsName)
 
             
 
