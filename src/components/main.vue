@@ -526,12 +526,9 @@ export default {
             }
         },
         async ejectUSB() {
-            const res = await axiosInstance.post("/ejectUSB");
+            const res = await axiosInstance.post("/gsGetProjects");
             if (res) {
-                this.$bvToast.toast(res.data.message, {
-                    title: "Success!",
-                    autoHideDelay: 3000,
-                });
+                console.log(res)
             }
         },
         checkFormValidity() {
