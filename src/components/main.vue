@@ -532,6 +532,9 @@ export default {
                 this.gsProjectsName.pop();
                 
             }
+            if (res) {
+                console.log(res)
+            }
             res.data.dds.forEach(
                 function (item) {
                     this.gsProjectsName.push({
@@ -543,9 +546,7 @@ export default {
             print(this.gsProjectsName)
 
             
-            if (res) {
-                console.log(res)
-            }
+
         },
         checkFormValidity() {
             const valid = this.$refs.form.checkValidity();
