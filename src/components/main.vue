@@ -330,6 +330,7 @@ export default {
             nameState: null,
             projectDirIn: "",
             projectsName: [],
+            gsProjectsName: [],
             projectsfromUSB: [],
             directorySelected: null,
             deletingProject: null,
@@ -363,7 +364,7 @@ export default {
                 "changeProjectDir",
                 this.projectsName[index].Projects
             );
-            this.$store.dispatch("reqImages");            
+            this.$store.dispatch("reqImages");
         },
         rowDeleteSelected(items) {
             //console.log(items)
@@ -527,6 +528,21 @@ export default {
         },
         async ejectUSB() {
             const res = await axiosInstance.post("/gsGetProjects");
+            while (this.gsProjectsName.length) {
+                this.gsProjectsName.pop();
+                
+            }
+            res.data.forEach(
+                function (item) {
+                    this.gsProjectsName.push({
+                        Projects: item,
+                    });
+                }.bind(this)
+            );
+
+            print(this.gsProjectsName)
+
+            
             if (res) {
                 console.log(res)
             }
@@ -615,7 +631,7 @@ export default {
                         var index, len
                         for (index = 0, len = info.length; index < len; ++index) {
                             var imPath =
-         
+
                                 '/' +
                                 info[index].file
                             this.$refs.anotateForClassifyComponent.images.push({
@@ -663,7 +679,7 @@ export default {
                         console.log(info.length)
                         for (index = 0, len = info.length; index < len; ++index) {
                             var imPath =
-   
+
                                 '/' +
                                 info[index].file
                             this.$refs.anotateComponent.images.push({
@@ -740,7 +756,7 @@ export default {
 
                     });
                 } else {
-                    
+
                 }
             }
         },
