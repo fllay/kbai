@@ -1,32 +1,30 @@
 <template>
 <div class="w-100 h-100">
-        <div class="vld-parent">
-        <loading :active.sync="isLoading" 
-        :can-cancel="true" 
-        :is-full-page="fullPage"></loading>
-    <div class="d-flex w-100 h-100 outer-wrap">
-        <div class="d-flex flex-fill flex-column main-panel" style="background-color:white;">
-            <div class="d-flex flex-fill align-items-center justify-content-center">
-                <div class="row">
-                    <b-col md="auto">
-                        <div class="image-container">
-                            <!--<b-img crossorigin="anonymous" ref="displayImage" style="margin-top: 10px; width: 100%;" :src="getImgSrc" alt="Center image"></b-img>-->
-                            <!-- <video id="webcam" autoplay playsinline width="640" height="480"></video>
+    <div class="vld-parent">
+        <loading :active.sync="isLoading" :can-cancel="true" :is-full-page="fullPage"></loading>
+        <div class="d-flex w-100 h-100 outer-wrap">
+            <div class="d-flex flex-fill flex-column main-panel" style="background-color:white;">
+                <div class="d-flex flex-fill align-items-center justify-content-center">
+                    <div class="row">
+                        <b-col md="auto">
+                            <div class="image-container">
+                                <!--<b-img crossorigin="anonymous" ref="displayImage" style="margin-top: 10px; width: 100%;" :src="getImgSrc" alt="Center image"></b-img>-->
+                                <!-- <video id="webcam" autoplay playsinline width="640" height="480"></video>
                             <canvas id="canvas" class="d-none"></canvas> -->
-                            <Camera ref="camera" width="640" height="480" />
-                            <!-- <audio id="snapSound" src="audio/snap.wav" preload="auto"></audio> -->
-                        </div>
-                    </b-col>
+                                <Camera ref="camera" width="640" height="480" />
+                                <!-- <audio id="snapSound" src="audio/snap.wav" preload="auto"></audio> -->
+                            </div>
+                        </b-col>
+                    </div>
                 </div>
-            </div>
-            <div class="img-slider">
-                <!-- <VueSlickCarousel v-if="images.length" v-bind="settings" class="carouselContainer">
+                <div class="img-slider">
+                    <!-- <VueSlickCarousel v-if="images.length" v-bind="settings" class="carouselContainer">
                     <div v-for="file in images" :key="file.id">
                         <div class="img"><img :src="file.file" alt="" srcset=""></div>
                     </div>
                 </VueSlickCarousel> -->
 
-                <!-- <div class="img active"><img class="thumb" src="../assets/UI/png/Group 116.png" alt="" srcset=""><img class="cancel-btn" src="../assets/UI/png/cancel.png" alt="" srcset=""></div>
+                    <!-- <div class="img active"><img class="thumb" src="../assets/UI/png/Group 116.png" alt="" srcset=""><img class="cancel-btn" src="../assets/UI/png/cancel.png" alt="" srcset=""></div>
                 <div class="img"><img class="thumb" src="../assets/UI/png/Group 116.png" alt="" srcset=""><img class="cancel-btn" src="../assets/UI/png/cancel.png" alt="" srcset=""></div>
                 <div class="img"><img class="thumb" src="../assets/UI/png/Group 116.png" alt="" srcset=""><img class="cancel-btn" src="../assets/UI/png/cancel.png" alt="" srcset=""></div>
                 <div class="img"><img class="thumb" src="../assets/UI/png/Group 116.png" alt="" srcset=""><img class="cancel-btn" src="../assets/UI/png/cancel.png" alt="" srcset=""></div>
@@ -39,29 +37,29 @@
                 <div class="img"><img class="thumb" src="../assets/UI/png/Group 116.png" alt="" srcset=""><img class="cancel-btn" src="../assets/UI/png/cancel.png" alt="" srcset=""></div>
                 <div class="img"><img class="thumb" src="../assets/UI/png/Group 116.png" alt="" srcset=""><img class="cancel-btn" src="../assets/UI/png/cancel.png" alt="" srcset=""></div> -->
 
-                <div :id="id" :class="{'img': true, 'active': imageActiveIndex === id }" v-for="(file, id) in images" :key="id" v-on:click="onSelect($event)">
-                    <img class="thumb" :src="file.file" alt="" srcset=""><img class="cancel-btn" src="../assets/UI/png/cancel.png" @click="deleteImage(id)" alt="" srcset="">
+                    <div :id="id" :class="{'img': true, 'active': imageActiveIndex === id }" v-for="(file, id) in images" :key="id" v-on:click="onSelect($event)">
+                        <img class="thumb" :src="file.file" alt="" srcset=""><img class="cancel-btn" src="../assets/UI/png/cancel.png" @click="deleteImage(id)" alt="" srcset="">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="side-panel" style="width:300px;">
-            <div class="center">
-                <img @click="takePhoto" v-on:click.prevent class="camera-btn op-btn" src="../assets/UI/png/Group 116.png" height="128" alt="" srcset="" />
-                <!-- <div class="next op-btn">
+            <div class="side-panel" style="width:300px;">
+                <div class="center">
+                    <img @click="takePhoto" v-on:click.prevent class="camera-btn op-btn" src="../assets/UI/png/Group 116.png" height="128" alt="" srcset="" />
+                    <!-- <div class="next op-btn">
                     <span>ANNOTATE</span>
                     <span class="ico"><img src="../assets/UI/svg/up-arrow.svg" alt="" srcset="" /></span>
                 </div> -->
-            </div>
+                </div>
 
-            <div class="center">
+                <div class="center">
 
-                <b-button v-b-modal.modal-1>Upload images</b-button>
-                <!-- <div class="next op-btn">
+                    <b-button v-b-modal.modal-1>Upload images</b-button>
+                    <!-- <div class="next op-btn">
                     <span>ANNOTATE</span>
                     <span class="ico"><img src="../assets/UI/svg/up-arrow.svg" alt="" srcset="" /></span>
                 </div> -->
-            </div>
-            <!-- <div class="display-panel">
+                </div>
+                <!-- <div class="display-panel">
                 <p class="display-image">
                     <canvas
                         rcrossorigin="anonymous"
@@ -69,26 +67,25 @@
                     />
                 </p>
              </div>-->
+            </div>
         </div>
+        <b-modal ref="capture-modal" hide-footer title="Using Component Methods">
+            <div class="d-block text-center">
+                <h3> New image has been captured!</h3>
+            </div>
+        </b-modal>
+
+        <b-modal ref="modal-1-ref" id="modal-1" title="Upload images" ok-only ok-variant="secondary" ok-title="Dismiss">
+
+            <div class="large-12 medium-12 small-12 cell">
+                <label>Files
+                    <input type="file" id="files" ref="files" accept="image/x-png,image/gif,image/jpeg" multiple v-on:change="handleFilesUpload()" />
+                </label>
+                <button v-on:click="submitFiles()" class="btn btn-primary new-label">Submit</button>
+            </div>
+        </b-modal>
+
     </div>
-    <b-modal ref="capture-modal" hide-footer title="Using Component Methods">
-        <div class="d-block text-center">
-            <h3> New image has been captured!</h3>
-        </div>
-    </b-modal>
-
-  
-    <b-modal ref="modal-1-ref" id="modal-1" title="Upload images"  ok-only ok-variant="secondary" ok-title="Dismiss" >
-
-        <div class="large-12 medium-12 small-12 cell">
-            <label>Files
-                <input type="file" id="files" ref="files" accept="image/x-png,image/gif,image/jpeg" multiple v-on:change="handleFilesUpload()" />
-            </label>
-            <button v-on:click="submitFiles()" class="btn btn-primary new-label">Submit</button>
-        </div>
-    </b-modal>
-
-</div>
 </template>
 
 <script>
@@ -127,8 +124,8 @@ var axiosInstance = axios.create({
 export default {
     name: "Capture",
     components: {
-         Loading,
-         Camera
+        Loading,
+        Camera
     },
     props: {},
     created() {},
@@ -172,7 +169,6 @@ export default {
                 formData.append('files[' + i + ']', file);
             }
 
-            
             formData.append('projectpath', this.$store.getters.getProjectDir);
             console.log("This is a list")
             console.log(formData)
@@ -182,7 +178,7 @@ export default {
             */
             this.$refs['modal-1-ref'].hide()
             this.isLoading = true
-            console.log(this.isLoading )
+            console.log(this.isLoading)
             axios.post('/multiple-files',
                     formData, {
                         headers: {
@@ -191,6 +187,28 @@ export default {
                     }
                 ).then(function () {
                     console.log('SUCCESS!!');
+                    axiosInstance.post("/getFiles", {
+                        path: this.$store.state.projectDir
+                    }).then((response) => {
+                        console.log(response.data.files);
+                        while (this.images.length) {
+                            this.images.pop();
+                        }
+                        var info = response.data.files
+                        var index, len
+                        for (index = 0, len = info.length; index < len; ++index) {
+                            var imPath =
+
+                                '/' +
+                                info[index].file
+                            this.images.push({
+                                fileName: info[index].file,
+                                file: imPath,
+                                id: info[index].id,
+                            })
+                        }
+
+                    });
                     this.isLoading = false
                 }.bind(this))
                 .catch(function () {
