@@ -532,7 +532,7 @@ export default {
                 this.gsProjectsName.pop();
                 
             }
-            res.data.forEach(
+            res.data.dds.forEach(
                 function (item) {
                     this.gsProjectsName.push({
                         Projects: item,
