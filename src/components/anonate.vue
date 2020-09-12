@@ -430,7 +430,7 @@ export default {
             this.imFolder = "images";
 
             var imPath = "/" + this.imFolder + "/";
-            var xmlFileName = this.selectedFile
+            var xmlFileName = this.selectedFile.split('.').slice(0, -1).join('.') + ".xml"
 
             console.log("xmlFileName = ");
             console.log(xmlFileName);
