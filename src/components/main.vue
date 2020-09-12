@@ -535,7 +535,7 @@ export default {
             if (res) {
                 console.log(res)
             }
-            res.data.dds.forEach(
+            res.data.projects.forEach(
                 function (item) {
                     this.gsProjectsName.push({
                         Projects: item,
