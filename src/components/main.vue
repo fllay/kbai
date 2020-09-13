@@ -19,7 +19,7 @@
                 <div data-md-tooltip="บันทึกข้อมูล" class="btn-base save" variant="success" @click="saveToUSB" :disabled="isLoading || isSaving">
                     <b-spinner v-if="isSaving" small />
                 </div>
-                <div data-md-tooltip="นำ Thumb drive ออก" class="btn-base eject" variant="danger" @click="ejectUSB" :disabled="isLoading || isSaving" />
+                <div data-md-tooltip="นำ Thumb drive ออก" class="btn-base eject" variant="danger" @click="ejectUSB" v-b-modal.gs_modal_list_files :disabled="isLoading || isSaving" />
             </div>
             <div class="left-bottom-content d-flex flex-fill">
                 <div class="proj-name">
@@ -234,6 +234,23 @@
         </b-table>
     </b-modal>
 
+    <b-modal id="gs_modal_list_files" ref="openModal" title="Import project from Google drive" @show="resetOpenModal" @hidden="resetOpenModal" @ok="gsImportProject">
+        <!--<div v-for="(item, index) in projectsName" :key="`fruit-${index}`">
+            {{ item }}
+        </div>-->
+        <b-dropdown id="dropdown-1" :text="
+            getTrainingType !== 'None'
+              ? getTrainingType
+              : 'Select trainning type'
+          " class="mode-select">
+            <b-dropdown-item @click="handleSelect('None')">None</b-dropdown-item>
+            <b-dropdown-item @click="handleSelect('Object detection')">Object detection</b-dropdown-item>
+            <b-dropdown-item @click="handleSelect('Image classification')">Image classification</b-dropdown-item>
+        </b-dropdown>
+        <b-table show-empty striped hover stacked="md" caption-top selectable :select-mode="selectMode" selectedVariant="success" :items="gsProjectsName" @row-selected="gsRowSelected" @row-clicked="gsRowClicked">
+        </b-table>
+    </b-modal>
+
     <b-modal id="modal_list_delete_files" title="Project list" @ok="handleProjectDelete">
         <b-table show-empty striped hover stacked="md" caption-top selectable :select-mode="selectMode" selectedVariant="success" :items="projectsName" @row-selected="rowDeleteSelected" @row-clicked="rowDeleteClicked">
         </b-table>
@@ -377,6 +394,16 @@ export default {
                 this.projectsName[index].Projects
             );
             this.deletingProject = this.projectsName[index].Projects;
+        },
+        gsRowSelected(items) {
+            //console.log(items)
+            return (this.selected = items);
+        },
+        gsRowClicked: function (item, index) {
+            console.log(this.gsProjectsName[index].Projects)
+        },
+        gsImportProject: function() {
+
         },
         handleProjectDelete: function (bvModalEvt) {
             if (this.deletingProject === null) {
@@ -530,7 +557,7 @@ export default {
             const res = await axiosInstance.post("/gsGetProjects");
             while (this.gsProjectsName.length) {
                 this.gsProjectsName.pop();
-                
+
             }
             if (res) {
                 console.log(res)
@@ -544,8 +571,6 @@ export default {
             );
 
             console.log(this.gsProjectsName)
-
-            
 
         },
         checkFormValidity() {
