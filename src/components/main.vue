@@ -1,5 +1,8 @@
 <template>
 <div>
+          <loading :active.sync="isLoading" 
+        :can-cancel="false" 
+        :is-full-page="fullPage"></loading>
     <div class="container-fluid vh-100 d-flex main-bg">
         <div class="left-panel d-flex flex-column">
             <div class="l-title font-weight-bold">KidBright AI</div>
@@ -306,6 +309,11 @@ import "../prompt";
 //you can also import this in your style tag
 import "vue-nav-tabs/themes/vue-tabs.css";
 import "vue-awesome/icons";
+
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
+
 // import VIcon from 'vue-awesome/components/Icon'
 
 //import BlocklyJS from 'blockly/javascript';
@@ -335,6 +343,7 @@ export default {
         TrainLocal,
         // eslint-disable-next-line vue/no-unused-components
         BlocklyComponent,
+        Loading,
         // VIcon,
     },
     data: function () {
@@ -405,12 +414,14 @@ export default {
             this.gsSelectedProject = this.gsProjectsName[index].Projects
         },
         gsImportProject: function () {
+            this.isLoading = true;
             axiosInstance
                 .post('importFromGoogleDrive', {
                     projectName: this.gsSelectedProject
                 })
                 .then((response) => {
                     console.log(response.data)
+                    this.isLoading = false;
                     //this.isProjectLoaded = true
                 })
         },
