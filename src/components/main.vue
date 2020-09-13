@@ -369,6 +369,7 @@ export default {
             isSaving: false,
             isLoading: false,
             rbServer: null,
+            gsSelectedProject: "",
         };
     },
     methods: {
@@ -401,9 +402,17 @@ export default {
         },
         gsRowClicked: function (item, index) {
             console.log(this.gsProjectsName[index].Projects)
+            this.gsSelectedProject = this.gsProjectsName[index].Projects
         },
-        gsImportProject: function() {
-
+        gsImportProject: function () {
+            axiosInstance
+                .post('importFromGoogleDrive', {
+                    projectName: this.gsSelectedProject
+                })
+                .then((response) => {
+                    console.log(response.data)
+                    //this.isProjectLoaded = true
+                })
         },
         handleProjectDelete: function (bvModalEvt) {
             if (this.deletingProject === null) {
