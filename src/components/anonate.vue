@@ -664,7 +664,7 @@ export default {
         this.completedSteps = 0
         console.log(this.images)
         this.projectDir = this.$store.getters.getProjectDir;
-        this.$refs["progress-modal"].show();
+        
     },
     computed: {
         ...mapGetters(["getProjectDir", "getImages"]),
