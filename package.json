@@ -41,6 +41,7 @@
     "vue-long-click": "0.0.4",
     "vue-multipane": "^0.9.5",
     "vue-nav-tabs": "^0.5.7",
+    "vue-radial-progress": "^0.3.2",
     "vue-router": "^3.3.4",
     "vue-rx": "^6.2.0",
     "vue-slick-carousel": "^1.0.6",

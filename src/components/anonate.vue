@@ -121,6 +121,14 @@
             </b-container>
         </b-form>
     </b-modal>
+
+    <b-modal ref="progress-modal" id="progressModal" title="Now loading!!" hide-footer>
+        <radial-progress-bar :diameter="200" :completed-steps="completedSteps" :total-steps="totalSteps">
+            <p>Total steps: {{ totalSteps }}</p>
+            <p>Completed steps: {{ completedSteps }}</p>
+        </radial-progress-bar>
+    </b-modal>
+
 </div>
 </template>
 
@@ -147,6 +155,8 @@ import {
     mapGetters
 } from "vuex";
 
+import RadialProgressBar from 'vue-radial-progress'
+
 var convert = require("xml-js");
 //const API_URL = "http://172.20.10.2:3000/getFiles";
 
@@ -160,6 +170,7 @@ export default {
         clipperBasic,
         Multipane,
         MultipaneResizer,
+        RadialProgressBar
         /*VueSlickCarousel,*/
 
         //Splitpanes,
@@ -243,12 +254,19 @@ export default {
             annotationName: "",
             showBound: false,
             savedXmlFilename: "",
+            totalSteps: 0, 
+            completedSteps: 0,
 
         };
     },
     methods: {
-        onLoadImg: function(){
+        onLoadImg: function () {
             console.log("Image loaded")
+            this.completedSteps = this.completedSteps + 1
+            if(this.completedSteps == this.totalSteps){
+                this.$refs["progress-modal"].hide();
+            }
+
         },
         saveAnotationFile: async function () {
             var options = {
@@ -637,19 +655,16 @@ export default {
                     element.callback()
                 }
             }
-        },
-
-        loadedifcomplete: function (el, binding) {
-            if (el.complete) {
-                console.log("Loading completed")
-            }
         }
     },
     mounted() {
         console.log("Anotation")
         this.images = this.$store.getters.getImages;
+        this.totalSteps = this.images.length
+        this.completedSteps = 0
         console.log(this.images)
         this.projectDir = this.$store.getters.getProjectDir;
+        this.$refs["progress-modal"].show();
     },
     computed: {
         ...mapGetters(["getProjectDir", "getImages"]),
@@ -681,6 +696,8 @@ export default {
 
         getImagesData() {
             this.images = this.$store.getters.getImages;
+            this.totalSteps = this.images.length
+            this.completedSteps = 0
             console.log(this.images)
             return this.images
         },
