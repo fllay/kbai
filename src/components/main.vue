@@ -717,7 +717,7 @@ export default {
                         path: this.$store.state.projectDir
                     }).then((response) => {
                         console.log(response.data.files);
-                        this.$ref.anotateComponent.this.$refs["progress-modal"].show();
+                        this.$ref.anotateComponent["progress-modal"].show();
                         while (this.$refs.anotateComponent.images.length) {
                             this.$refs.anotateComponent.images.pop();
                         }
