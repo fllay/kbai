@@ -718,6 +718,8 @@ export default {
                     }).then((response) => {
                         console.log(response.data.files);
                         this.$refs.anotateComponent.showLoadingModal()
+                        this.$refs.anotateComponent.completedSteps = 0
+                        this.$refs.anotateComponent.totalSteps = 0
                         while (this.$refs.anotateComponent.images.length) {
                             this.$refs.anotateComponent.images.pop();
                         }

@@ -609,6 +609,8 @@ export default {
         },
         callback_vfor() {
             console.log('v-for loop finished')
+            this.totalSteps = this.totalSteps + 1
+
         },
         
         /*listFiles: function () {
