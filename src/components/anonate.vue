@@ -38,7 +38,7 @@
                 <div class="img"><img class="thumb" src="../assets/UI/png/Group 116.png" alt="" srcset=""></div> -->
                 <div :id="id" :class="{'img': true, 'active': imageActiveIndex === id }" v-for="(file, id) in images" :key="id" v-for-callback="{key: id, array: items, callback: callback_vfor}" v-on:click="onSelect($event)">
 
-                    <img class="thumb" :src="file.file" alt="" srcset="" v-loadedifcomplete="file"> <span v-if="file.isAnnotated == 1" class="annotated-btn count">{{file.classCounts}}</span>
+                    <img class="thumb" :src="file.file" alt="" srcset="" @load="onLoadImg"> <span v-if="file.isAnnotated == 1" class="annotated-btn count">{{file.classCounts}}</span>
 
                 </div>
 
@@ -247,6 +247,9 @@ export default {
         };
     },
     methods: {
+        onLoadImg: function(){
+            console.log("Image loaded")
+        },
         saveAnotationFile: async function () {
             var options = {
                 compact: true,
@@ -635,7 +638,7 @@ export default {
                 }
             }
         },
-        
+
         loadedifcomplete: function (el, binding) {
             if (el.complete) {
                 console.log("Loading completed")
