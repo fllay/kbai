@@ -38,7 +38,7 @@
                 <div class="img"><img class="thumb" src="../assets/UI/png/Group 116.png" alt="" srcset=""></div> -->
                 <div :id="id" :class="{'img': true, 'active': imageActiveIndex === id }" v-for="(file, id) in images" :key="id" v-for-callback="{key: id, array: items, callback: callback_vfor}" v-on:click="onSelect($event)">
 
-                    <img class="thumb" :src="file.file" alt="" srcset=""><span v-if="file.isAnnotated == 1" class="annotated-btn count">{{file.classCounts}}</span>
+                    <img class="thumb" :src="file.file" alt="" srcset="" v-loadedifcomplete="file"> <span v-if="file.isAnnotated == 1" class="annotated-btn count">{{file.classCounts}}</span>
 
                 </div>
 
@@ -268,7 +268,7 @@ export default {
 
             await axiosInstance
                 .post("/writeXml", {
-                    path : this.$store.getters.getProjectDir,
+                    path: this.$store.getters.getProjectDir,
                     filename: xmlFileName,
                     data: result,
                 })
@@ -525,7 +525,7 @@ export default {
                 1,
                 this.imFolder.length
             );
-            this.anotate.annotation.path = this.fullPath  + imsr; //imsr.substr(1, imsr.length);
+            this.anotate.annotation.path = this.fullPath + imsr; //imsr.substr(1, imsr.length);
             if (this.images === undefined || this.images.length == 0) {
                 // array empty or does not exist
             } else {
@@ -633,6 +633,12 @@ export default {
                 if (typeof element.callback === 'function') {
                     element.callback()
                 }
+            }
+        },
+        
+        loadedifcomplete: function (el, binding) {
+            if (el.complete) {
+                console.log("Loading completed")
             }
         }
     },
