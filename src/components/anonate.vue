@@ -590,6 +590,10 @@ export default {
             console.log(this.classes);
             this.$refs["class-modal"].hide();
         },
+        showLoadingModal: function(){
+
+            this.$refs["progress-modal"].show();
+        },
         onReset: function () {},
         boxRowClicked: function (item, index) {
             this.anotaionActiveIndex = index
@@ -606,6 +610,7 @@ export default {
         callback_vfor() {
             console.log('v-for loop finished')
         },
+        
         /*listFiles: function () {
                 while (this.images.length) {
                     this.images.pop();
