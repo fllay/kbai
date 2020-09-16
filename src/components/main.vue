@@ -655,6 +655,7 @@ export default {
             // Because without using v-tab, Then index start with 1
             if (tabIndex == 1 && this.loaded == false) {
                 this.isRunHiden = false;
+                this.$refs.anotateComponent.completedSteps = 0
             }
             if (tabIndex == 1) {
                 this.isRunHiden = true;
