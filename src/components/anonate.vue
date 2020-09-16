@@ -122,7 +122,7 @@
         </b-form>
     </b-modal>
 
-    <b-modal ref="progress-modal" id="progressModal" title="Now loading!!" hide-footer>
+    <b-modal ref="progress-modal" id="progressModal" title="Now loading!!" hide-footer no-close-on-esc no-close-on-backdrop hide-header-close>
         <radial-progress-bar :diameter="200" :completed-steps="completedSteps" :total-steps="totalSteps">
             <p>Total steps: {{ totalSteps }}</p>
             <p>Completed steps: {{ completedSteps }}</p>
