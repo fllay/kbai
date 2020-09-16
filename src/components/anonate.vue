@@ -1,5 +1,8 @@
 <template>
 <div class="w-100 h-100">
+          <loading :active.sync="isLoading" 
+        :can-cancel="false" 
+        :is-full-page="fullPage"></loading>
     <div class="d-flex w-100 h-100 outer-wrap">
         <div class="d-flex flex-fill flex-column main-panel" style="background-color:white;">
             <div class="d-flex flex-fill align-items-center justify-content-center">
@@ -156,6 +159,9 @@ import {
 } from "vuex";
 
 import RadialProgressBar from 'vue-radial-progress'
+import Loading from 'vue-loading-overlay';
+// Import stylesheet
+import 'vue-loading-overlay/dist/vue-loading.css';
 
 var convert = require("xml-js");
 //const API_URL = "http://172.20.10.2:3000/getFiles";
@@ -170,7 +176,8 @@ export default {
         clipperBasic,
         Multipane,
         MultipaneResizer,
-        RadialProgressBar
+        RadialProgressBar,
+        Loading
         /*VueSlickCarousel,*/
 
         //Splitpanes,
@@ -179,6 +186,7 @@ export default {
     created() {},
     data() {
         return {
+            isLoading: false,
             imageActiveIndex: undefined,
             anotaionActiveIndex: undefined,
             /*settings: {
@@ -394,6 +402,7 @@ export default {
             var index = Number(targetId)
             this.imageActiveIndex = index
             var previous_selectedFile = this.selectedFile
+            this.isLoading = true
 
             if (this.anotate.annotation.object.length > 0) {
                 console.log("Save anotation file")
@@ -426,6 +435,7 @@ export default {
                             console.log("File is OK!!!!");
 
                         }
+                        this.isLoading = false
                     })
                     .catch((error) => {
                         console.log(error);
