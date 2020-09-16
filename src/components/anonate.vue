@@ -123,7 +123,7 @@
     </b-modal>
 
     <b-modal ref="progress-modal" id="progressModal" title="Now loading!!" hide-footer no-close-on-esc no-close-on-backdrop hide-header-close>
-        <radial-progress-bar :diameter="200" :completed-steps="completedSteps" :total-steps="totalSteps" :strokeWidth="33" :innerStrokeWidth="33">
+        <radial-progress-bar :diameter="200" :completed-steps="completedSteps" :total-steps="totalSteps" :strokeWidth="15" :innerStrokeWidth="15">
             <p>Loaded {{ completedSteps }} of {{totalSteps}} images</p>
         </radial-progress-bar>
     </b-modal>
