@@ -717,8 +717,8 @@ export default {
                         path: this.$store.state.projectDir
                     }).then((response) => {
                         console.log(response.data.files);
-                        this.$refs.anotateComponent.showLoadingModal()
-                        //this.$refs.anotateComponent.completedSteps = 0
+
+
                         this.$refs.anotateComponent.totalSteps = 0
                         while (this.$refs.anotateComponent.images.length) {
                             this.$refs.anotateComponent.images.pop();
@@ -742,6 +742,12 @@ export default {
                             console.log(info[index].file)
                             this.$refs.anotateComponent.totalSteps = this.$refs.anotateComponent.totalSteps + 1
                         }
+                        if(this.$refs.anotateComponent.totalSteps == this.$refs.anotateComponent.completedSteps){
+                            
+                        } else {
+                            this.$refs.anotateComponent.showLoadingModal()
+                        }
+                        //this.$refs.anotateComponent.completedSteps = 0
 
                     });
 
