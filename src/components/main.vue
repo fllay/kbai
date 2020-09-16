@@ -606,7 +606,7 @@ export default {
         handleOk(bvModalEvt) {
             // Prevent modal from closing
             bvModalEvt.preventDefault();
-            this.$refs.anotateComponent.completedSteps = 0
+            
             // Trigger submit handler
             this.handleSubmit();
         },
@@ -621,6 +621,7 @@ export default {
             // Push the name to submitted names
             //this.submittedNames.push(this.projectDirIn)
             this.$store.dispatch("setProjectDir", this.projectDirIn);
+            this.$refs.anotateComponent.completedSteps = 0
             // Hide the modal manually
             this.$nextTick(() => {
                 this.$store.dispatch("regProjects");
@@ -656,11 +657,11 @@ export default {
             // Because without using v-tab, Then index start with 1
             if (tabIndex == 1 && this.loaded == false) {
                 this.isRunHiden = false;
-                this.$refs.anotateComponent.completedSteps = 0
+                //this.$refs.anotateComponent.completedSteps = 0
             }
             if (tabIndex == 1) {
                 this.isRunHiden = true;
-                this.$refs.anotateComponent.completedSteps = 0
+                //this.$refs.anotateComponent.completedSteps = 0
             } else {
                 this.isRunHiden = false;
             }
