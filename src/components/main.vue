@@ -658,6 +658,7 @@ export default {
             }
             if (tabIndex == 1) {
                 this.isRunHiden = true;
+                this.$refs.anotateComponent.completedSteps = 0
             } else {
                 this.isRunHiden = false;
             }
