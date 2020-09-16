@@ -469,6 +469,7 @@ export default {
                     //this.projectsName = this.$store.getters.getProjects
                     //this.$store.dispatch('regProjects')
                     console.log(this.projectsName);
+                    this.$refs.anotateComponent.completedSteps = 0
                 },
                 () => {
                     console.error(
