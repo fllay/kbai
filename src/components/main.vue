@@ -740,6 +740,7 @@ export default {
                                 classCounts: info[index].classCounts,
                             })
                             console.log(info[index].file)
+                            this.$refs.anotateComponent.totalSteps = this.$refs.anotateComponent.totalSteps + 1
                         }
 
                     });

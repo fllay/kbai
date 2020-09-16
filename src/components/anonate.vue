@@ -667,7 +667,7 @@ export default {
     mounted() {
         console.log("Anotation")
         this.images = this.$store.getters.getImages;
-        this.totalSteps = this.images.length
+        //this.totalSteps = this.images.length
         this.completedSteps = 0
         console.log(this.images)
         this.projectDir = this.$store.getters.getProjectDir;
@@ -703,7 +703,7 @@ export default {
 
         getImagesData() {
             this.images = this.$store.getters.getImages;
-            this.totalSteps = this.images.length
+            //this.totalSteps = this.images.length
             this.completedSteps = 0
             console.log(this.images)
             return this.images
