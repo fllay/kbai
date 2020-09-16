@@ -606,6 +606,7 @@ export default {
         handleOk(bvModalEvt) {
             // Prevent modal from closing
             bvModalEvt.preventDefault();
+            this.$refs.anotateComponent.completedSteps = 0
             // Trigger submit handler
             this.handleSubmit();
         },
