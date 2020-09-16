@@ -498,6 +498,7 @@ export default {
                         } else {
                             console.log("FAIL");
                         }
+                        this.isLoading = false
                     }.bind(this)
                 )
                 .catch(function (error) {
