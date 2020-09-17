@@ -555,7 +555,7 @@
 import $ from "jquery";
 import axios from 'axios'
 var axiosInstance = axios.create({
-    baseURL: `${location.protocol}//${location.hostname}:80`,
+    baseURL: `${location.protocol}//${location.hostname}`,
 })
 export default {
   name: "HelloWorld",
