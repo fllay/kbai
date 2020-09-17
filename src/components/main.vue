@@ -323,7 +323,7 @@ import Blockly from "blockly";
 //import blocklyPython from 'node-blockly/python';
 
 var axiosInstance = axios.create({
-    baseURL: `${location.protocol}//${location.hostname}:80`,
+    baseURL: `${location.protocol}//${location.hostname}`,
 });
 
 var axios_options = {

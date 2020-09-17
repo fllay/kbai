@@ -55,7 +55,7 @@ import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 
 var axiosInstance = axios.create({
-  baseURL: `${location.protocol}//${location.hostname}:80`,
+  baseURL: `${location.protocol}//${location.hostname}`,
 });
 
 

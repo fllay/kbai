@@ -167,7 +167,7 @@ var convert = require("xml-js");
 //const API_URL = "http://172.20.10.2:3000/getFiles";
 
 var axiosInstance = axios.create({
-    baseURL: `${location.protocol}//${location.hostname}:80`,
+    baseURL: `${location.protocol}//${location.hostname}`,
 });
 
 export default {
