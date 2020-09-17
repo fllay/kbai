@@ -5,7 +5,7 @@ import axios from 'axios'
 Vue.use(Vuex)
 
 var axiosInstance = axios.create({
-  baseURL: `${location.protocol}//${location.hostname}:80`,
+  baseURL: `${location.protocol}//${location.hostname}`,
 })
 
 export default new Vuex.Store({
