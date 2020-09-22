@@ -718,6 +718,7 @@ export default {
                     });
                 } else {
                     console.log("get all files Object deetection" + this.$store.state.projectDir);
+                    this.$refs.anotateComponent.totalSteps = 0
                     if(this.$refs.anotateComponent.totalSteps == this.$refs.anotateComponent.completedSteps){
                             
                     } else {
@@ -729,7 +730,7 @@ export default {
                         console.log(response.data.files);
 
 
-                        this.$refs.anotateComponent.totalSteps = 0
+                        
                         while (this.$refs.anotateComponent.images.length) {
                             this.$refs.anotateComponent.images.pop();
                         }
