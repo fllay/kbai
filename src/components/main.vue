@@ -718,6 +718,11 @@ export default {
                     });
                 } else {
                     console.log("get all files Object deetection" + this.$store.state.projectDir);
+                    if(this.$refs.anotateComponent.totalSteps == this.$refs.anotateComponent.completedSteps){
+                            
+                    } else {
+                            this.$refs.anotateComponent.showLoadingModal()
+                    }
                     axiosInstance.post("/getFiles", {
                         path: this.$store.state.projectDir
                     }).then((response) => {
@@ -747,11 +752,7 @@ export default {
                             console.log(info[index].file)
                             this.$refs.anotateComponent.totalSteps = this.$refs.anotateComponent.totalSteps + 1
                         }
-                        if(this.$refs.anotateComponent.totalSteps == this.$refs.anotateComponent.completedSteps){
-                            
-                        } else {
-                            this.$refs.anotateComponent.showLoadingModal()
-                        }
+
                         //this.$refs.anotateComponent.completedSteps = 0
 
                     });
